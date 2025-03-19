@@ -1,53 +1,161 @@
+let moviesData = {
+    popular: [],
+    now_playing: [],
+    top_rated: []
+};
 
 async function popular() {
-    try {
-      const response = await fetch('http://localhost:3000/cinelist/movies/popular?page=1');
-      const data = await response.json();
-      renderMovies(data.results, 'movie-list');
-    } catch (error) {
-      console.error('Erro ao buscar filmes populares:', error);
-    }
+    toggleSections('id-popular');
+    const response = await fetch('http://localhost:3000/cinelist/movies/popular?page=1');
+    const movies = await response.json();
+    moviesData.popular = movies;
+    showMovies(movies, 'id-popular');
 }
-  
+
 async function now_playing() {
-    try {
-        const response = await fetch('http://localhost:3000/cinelist/movies/now_playing?page=1');
-        const data = await response.json();
-        renderMovies(data.results, 'movie-list');
-    } catch (error) {
-        console.error('Erro ao buscar filmes em exibição:', error);
-    }
+    toggleSections('id-now_playing');
+    const response = await fetch('http://localhost:3000/cinelist/movies/now_playing?page=1');
+    const movies = await response.json();
+    moviesData.now_playing = movies;
+    showMovies(movies, 'id-now_playing');
 }
 
 async function top_rated() {
-    try {
-        const response = await fetch('http://localhost:3000/cinelist/movies/top_rated?page=1');
-        const data = await response.json();
-        renderMovies(data.results, 'top-rated-movies');
-    } catch (error) {
-        console.error('Erro ao buscar filmes mais votados:', error);
-    }
+    toggleSections('id-top_rated');
+    const response = await fetch('http://localhost:3000/cinelist/movies/top_rated?page=1');
+    const movies = await response.json();
+    moviesData.top_rated = movies;
+    showMovies(movies, 'id-top_rated');
 }
 
-// Função para renderizar os filmes na tela
-function renderMovies(movies, containerId) {
+function toggleSections(sectionId) {
+    const sections = ['id-popular', 'id-now_playing', 'id-top_rated', 'id-favorites'];
+    sections.forEach(id => {
+        document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
+    });
+}
+
+
+
+function showMovies(movies, containerId) {
     const container = document.getElementById(containerId);
-    container.innerHTML = ''; // Limpa a área antes de renderizar
+    container.innerHTML = '';   
 
     movies.forEach(movie => {
         const movieItem = document.createElement('div');
         movieItem.classList.add('movie-item');
+
+        const isFavorite = moviesFavorites.includes(movie.id); /* retorna True ou false*/
+        const favoriteColor = isFavorite ? 'rgb(255, 217, 2)' : 'black';
+        const favoriteBgColor = isFavorite ? 'rgba(255, 217, 2, 0.247)' : 'rgba(255, 71, 71, 0.247)';
+        const favoriteBorderColor = isFavorite ? 'rgb(255, 217, 2)' : 'rgb(255, 0, 0)';
+
         movieItem.innerHTML = `
-        <h3>${movie.title}</h3>
-        <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
-        <p>${movie.overview}</p>
+            <div class="div-movie">
+                <h3 id="title">${movie.title}</h3>
+                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+                <div class="buton-movies">
+                    <button onclick="showMoreDetails(this)">Ver Mais</button>
+                    <button onclick="butonfavorite(${movie.id}, this)" id="favorite" style="color: ${favoriteColor}; background-color: ${favoriteBgColor}; border: 2px solid ${favoriteBorderColor};">☆</button>
+                </div>
+            </div>
+            <p class="movie-details">
+                <strong>Overview: </strong> ${movie.overview}<br>
+                <br>
+                <strong>Data de Lançamento: </strong> ${movie.release_date}<br>
+                <br>
+                <strong>Nota: </strong> ${movie.vote_average}<br>
+                <br>
+                <strong>Contagem de Votos: </strong> ${movie.vote_count}
+                <button onclick="videos(${movie.id})">Imagens e Trailers</button>
+            </p>
         `;
         container.appendChild(movieItem);
     });
 }
 
-function favorites() {
-    const container = document.getElementById('favorites-list');
-    container.innerHTML = '<p>Favoritos em breve...</p>';
+
+function showMoreDetails(button) {
+    const movieItem = button.closest('.movie-item');
+    const details = movieItem.querySelector('.movie-details');
+
+    details.style.display = details.style.display === 'block' ? 'none' : 'block';
+    
+    if (details.style.display === 'block') {
+        button.textContent = 'Ver Menos';
+    } else {
+        button.textContent = 'Ver Mais';
+    }
 }
-  
+
+async function videos(movieId) {
+    
+}
+
+function loadFavorites() {
+    const storedFavorites = localStorage.getItem('moviesFavorites');
+    
+    if (storedFavorites) {
+        return JSON.parse(storedFavorites);
+    } else {
+        return [];
+    }
+}
+
+function saveFavorites() {
+    localStorage.setItem('moviesFavorites', JSON.stringify(moviesFavorites));
+}
+
+let moviesFavorites = loadFavorites();
+
+async function butonfavorite(movieId, button) {
+    const isFavorite = moviesFavorites.includes(movieId); /*retorna True ou false*/
+
+    if (isFavorite) {
+        moviesFavorites = moviesFavorites.filter(id => id !== movieId);
+        button.style.color = 'black';
+        button.style.backgroundColor = 'rgba(255, 71, 71, 0.247)';
+        button.style.border = '2px solid rgb(255, 0, 0)';
+    } else {
+        moviesFavorites.push(movieId);
+        button.style.color = 'rgb(255, 217, 2)';
+        button.style.backgroundColor = 'rgba(255, 217, 2, 0.247)';
+        button.style.border = '2px solid rgb(255, 217, 2)';
+    }
+
+    saveFavorites();
+}
+
+async function favorites() {
+    toggleSections('id-favorites');
+    const container = document.getElementById('id-favorites');
+    container.innerHTML = '';
+
+    if (moviesFavorites.length === 0) {
+        container.innerHTML = '<p>Você não tem filmes favoritos no momento.</p>';
+        return;
+    }
+
+    const allMovies = [...moviesData.popular, ...moviesData.now_playing, ...moviesData.top_rated];
+    
+    const uniqueMovies = new Set();
+    const favoriteMovies = allMovies.filter(movie => {
+        if (moviesFavorites.includes(movie.id) && !uniqueMovies.has(movie.id)) {
+            uniqueMovies.add(movie.id);
+            return true;
+        }
+        return false;
+    });
+
+    if (favoriteMovies.length === 0) {
+        container.innerHTML = '<p>Você não tem filmes favoritos no momento.</p>';
+        return;
+    }
+
+    showMovies(favoriteMovies, 'id-favorites');
+}
+
+window.onload = () => {
+    moviesFavorites = loadFavorites();
+    popular();
+};

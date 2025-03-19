@@ -13,7 +13,6 @@ export default class MoviesService {
       const response = await axios.get(url);
       const movies = response.data.results;
 
-      // Retorna apenas os 30 filmes da página
       return movies;
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
@@ -29,7 +28,6 @@ export default class MoviesService {
       const response = await axios.get(url);
       const movies = response.data.results;
 
-      // Retorna apenas os 30 filmes da página
       return movies;
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
@@ -45,7 +43,6 @@ export default class MoviesService {
       const response = await axios.get(url);
       const movies = response.data.results;
 
-      // Retorna apenas os 30 filmes da página
       return movies;
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
