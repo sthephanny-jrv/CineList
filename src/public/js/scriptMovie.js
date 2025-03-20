@@ -25,7 +25,7 @@ async function showMovie() {
     const jsonImages = await images.json();
 
     const videos = await fetch(`http://localhost:3000/cinelist/movies/videos/${movieID}`);
-    //const jsonVideos = await videos.json();
+    const jsonVideos = await videos.json();
 
     const container = document.getElementById('pictures');
     container.innerHTML = '';     
@@ -49,11 +49,27 @@ async function showMovie() {
         `;
     
         const divImagess = movieItem.querySelector(".divImages");
-    
+
         jsonImages.backdrops.forEach(image => {
             divImagess.innerHTML += `
                 <img src="https://image.tmdb.org/t/p/w500${image.file_path}" alt="${movie.title}">
             `;
+        });
+
+        const divVideos = movieItem.querySelector(".divVideos");
+    
+        jsonVideos.forEach(video => {
+            if (video.site === "YouTube") {
+                divVideos.innerHTML += `
+                    <div class="video-container">
+                        <iframe
+                            src="https://www.youtube.com/embed/${video.key}" 
+                            title="${video.name}" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                `;
+            }
         });
     
         container.appendChild(movieItem);

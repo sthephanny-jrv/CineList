@@ -66,7 +66,8 @@ function showMovies(movies, containerId) {
                 <br>
                 <strong>Nota: </strong> ${movie.vote_average}<br>
                 <br>
-                <strong>Contagem de Votos: </strong> ${movie.vote_count}
+                <strong>Contagem de Votos: </strong> ${movie.vote_count}<br>
+                <br>
                 <button onclick="window.location.href='./filme.html?movieId=${movie.id}'">Imagens e Trailers</button>
             </p>
         `;
