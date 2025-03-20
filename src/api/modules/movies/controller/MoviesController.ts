@@ -44,4 +44,32 @@ export default class MoviesController {
 
     return response.status(200).json(movies);
   }
+
+  public async imagesMovie(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+
+    const { id } = request.params;
+    const iD = Number(id)
+
+    const moviesService = new MoviesService();
+    const images = await moviesService.imagesMovieService(iD);
+
+    return response.status(200).json(images);
+  }
+  
+  public async videosMovie(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+
+    const { id } = request.params;
+    const iD = Number(id)
+
+    const moviesService = new MoviesService();
+    const videos = await moviesService.videosMovieService(iD);
+
+    return response.status(200).json(videos);
+  }
 }

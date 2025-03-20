@@ -67,7 +67,7 @@ function showMovies(movies, containerId) {
                 <strong>Nota: </strong> ${movie.vote_average}<br>
                 <br>
                 <strong>Contagem de Votos: </strong> ${movie.vote_count}
-                <button onclick="videos(${movie.id})">Imagens e Trailers</button>
+                <button onclick="window.location.href='./filme.html?movieId=${movie.id}'">Imagens e Trailers</button>
             </p>
         `;
         container.appendChild(movieItem);
@@ -88,9 +88,6 @@ function showMoreDetails(button) {
     }
 }
 
-async function videos(movieId) {
-    
-}
 
 function loadFavorites() {
     const storedFavorites = localStorage.getItem('moviesFavorites');

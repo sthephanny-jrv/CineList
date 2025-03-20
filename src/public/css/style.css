@@ -136,7 +136,7 @@ nav a:hover {
 }
 
 
-.movie-item button {
+.movie-item button, .backButton{
     margin-top: 10px;
     padding: 8px 16px;
     background-color: #701414;
@@ -147,7 +147,7 @@ nav a:hover {
     margin-top: 15px;
 }
 
-.movie-item button:hover {
+.movie-item button:hover , .backButton:hover{
     background-color: #7a3939;
 }
 
@@ -171,4 +171,29 @@ nav a:hover {
     color: white;
     margin-top: 30px;
     text-align: justify;
+}
+
+.bot{
+    display: flex;
+    align-items: start;
+    padding-left: 20px;
+}
+
+#pictures{
+    padding-top: 20px;
+    margin-inline: 5px;
+}
+
+.div-movie h3{
+    font-weight: bold;
+    font-size: 30px;
+}
+.div-movie p{
+    font-size: 20px;
+    max-width: 50%;
+    padding-bottom: 30px;
+}
+
+.divImages img {
+    border-radius: 15px;
 }
