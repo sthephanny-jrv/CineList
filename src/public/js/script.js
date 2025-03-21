@@ -30,10 +30,14 @@ async function top_rated() {
 
 function toggleSections(sectionId) {
     const sections = ['id-popular', 'id-now_playing', 'id-top_rated', 'id-favorites'];
-    sections.forEach(id => {
+    const nav = ['pop', 'exib', 'vota', 'fav'];
+
+    sections.forEach((id, index) => {
         document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
+        document.getElementById(nav[index]).style.color = id === sectionId ? 'black' : 'white';
     });
 }
+
 
 
 
