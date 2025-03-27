@@ -83,12 +83,15 @@ function showMovies(movies, containerId) {
 function showMoreDetails(button) {
     const movieItem = button.closest('.movie-item');
     const details = movieItem.querySelector('.movie-details');
+    const title = movieItem.querySelector('#title');
 
     details.style.display = details.style.display === 'block' ? 'none' : 'block';
     
     if (details.style.display === 'block') {
         button.textContent = 'Ver Menos';
+        title.style.fontSize = '18px';
     } else {
+        title.style.fontSize = '24px';
         button.textContent = 'Ver Mais';
     }
 }
