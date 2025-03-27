@@ -36,7 +36,7 @@ function toggleSections(sectionId) {
         document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
         document.getElementById(nav[index]).style.color = id === sectionId ? 'black' : 'white';
     });
-}
+} 
 
 
 

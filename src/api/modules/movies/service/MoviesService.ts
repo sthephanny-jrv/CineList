@@ -13,7 +13,9 @@ export default class MoviesService {
       const response = await axios.get(url);
       const movies = response.data.results;
 
-      return movies;
+      const filterMovies = movies.filter((movie: any) => movie.overview && movie.overview.trim() !== "");
+      return filterMovies;
+
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
       throw new Error("Não foi possível buscar os filmes");
@@ -28,7 +30,9 @@ export default class MoviesService {
       const response = await axios.get(url);
       const movies = response.data.results;
 
-      return movies;
+      const filterMovies = movies.filter((movie: any) => movie.overview && movie.overview.trim() !== "");
+      return filterMovies;
+
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
       throw new Error("Não foi possível buscar os filmes");
@@ -43,7 +47,9 @@ export default class MoviesService {
       const response = await axios.get(url);
       const movies = response.data.results;
 
-      return movies;
+      const filterMovies = movies.filter((movie: any) => movie.overview && movie.overview.trim() !== "");
+      return filterMovies;
+
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
       throw new Error("Não foi possível buscar os filmes");
