@@ -64,7 +64,7 @@ function showMovies(movies, containerId) {
                 </div>
             </div>
             <p class="movie-details">
-                <strong>Overview: </strong> ${movie.overview}<br>
+                <strong>Descrição: </strong> ${movie.overview}<br>
                 <br>
                 <strong>Data de Lançamento: </strong> ${movie.release_date}<br>
                 <br>
