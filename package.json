@@ -1,0 +1,38 @@
+{
+  "name": "cinelist",
+  "version": "1.0.0",
+  "description": "Catálogo de filmes com interação dos usuários.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/index.ts",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sthephanny-jrv/CineList.git"
+  },
+  "author": "Sthephanny Jamilly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sthephanny-jrv/CineList/issues"
+  },
+  "homepage": "https://github.com/sthephanny-jrv/CineList#readme",
+  "dependencies": {
+    "axios": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-async-errors": "^3.1.1",
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.3.21"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^3.15.0",
+    "typescript": "^5.8.2"
+  }
+}

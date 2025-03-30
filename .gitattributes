@@ -1,0 +1,4 @@
+# Auto detect text files and perform LF normalization
+#  Ajuda a evitar conflitos no Git por quebra de linha
+# Mantém o código limpo para qualquer sistema operacional
+* text=auto
