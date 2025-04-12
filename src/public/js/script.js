@@ -33,7 +33,7 @@ function toggleSections(sectionId) {
     const nav = ['pop', 'exib', 'vota', 'fav'];
 
     sections.forEach((id, index) => {
-        document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
+        document.getElementById(id).style.display = id === sectionId ? 'flex' : 'none';
         document.getElementById(nav[index]).style.color = id === sectionId ? 'black' : 'white';
     });
 } 
@@ -57,23 +57,19 @@ function showMovies(movies, containerId) {
         movieItem.innerHTML = `
             <div class="div-movie">
                 <h3 id="title">${movie.title}</h3>
-                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+                <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.title}">
                 <div class="buton-movies">
                     <button onclick="showMoreDetails(this)">Ver Mais</button>
                     <button onclick="butonfavorite(${movie.id}, this)" id="favorite" style="color: ${favoriteColor}; background-color: ${favoriteBgColor}; border: 2px solid ${favoriteBorderColor};">☆</button>
                 </div>
             </div>
-            <p class="movie-details">
-                <strong>Descrição: </strong> ${movie.overview}<br>
-                <br>
-                <strong>Data de Lançamento: </strong> ${movie.release_date}<br>
-                <br>
-                <strong>Nota: </strong> ${movie.vote_average}<br>
-                <br>
-                <strong>Contagem de Votos: </strong> ${movie.vote_count}<br>
-                <br>
+            <div class="movie-details">
+                <p class="description"><strong>Descrição: </strong> ${movie.overview}</p>
+                <p><strong>Data de Lançamento: </strong> ${movie.release_date}</p>
+                <p><strong>Nota: </strong> ${movie.vote_average}</p>
+                <p><strong>Contagem de Votos: </strong> ${movie.vote_count}</p>
                 <button onclick="window.location.href='./filme.html?movieId=${movie.id}'">Imagens e Trailers</button>
-            </p>
+            </div>
         `;
         container.appendChild(movieItem);
     });

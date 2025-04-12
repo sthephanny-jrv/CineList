@@ -92,7 +92,7 @@ nav a:hover {
     padding: 30px;
     box-sizing: border-box; /* Isso garante que o padding não aumente o tamanho total */
     max-width: 30%;
-    height: auto;
+    max-height: 20%;
     margin: 15px auto;
     margin-bottom: 30px;
     transition: width 0.7s ease;
@@ -135,7 +135,8 @@ nav a:hover {
 
 .movie-item h3 {
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
+
     font-weight: bold;
     margin: 10px 0px;
     color: white;
@@ -180,6 +181,26 @@ nav a:hover {
     text-align: justify;
 }
 
+.movie-details p.description{
+    max-height: 150px;
+    overflow-y: scroll;
+    padding-inline: 5px;
+    margin-bottom: 30px;
+}
+
+.movie-details p.description::-webkit-scrollbar {
+    width: 8px;
+}
+  
+.movie-details p.description::-webkit-scrollbar-thumb {
+background-color: #888;
+border-radius: 4px;
+}
+
+.movie-details p.description::-webkit-scrollbar-thumb:hover {
+background-color: #555;
+}
+
 .bot{
     display: flex;
     align-items: start;
@@ -199,11 +220,6 @@ nav a:hover {
 .div-movie h3{
     font-weight: bold;
     font-size: 30px;
-}
-.div-movie p{
-    font-size: 20px;
-    max-width: 50%;
-    padding-bottom: 30px;
 }
 
 .divImages img {
