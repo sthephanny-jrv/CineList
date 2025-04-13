@@ -85,9 +85,9 @@ function showMoreDetails(button) {
     
     if (details.style.display === 'block') {
         button.textContent = 'Ver Menos';
-        title.style.fontSize = '18px';
+        title.style.fontSize = '16px';
     } else {
-        title.style.fontSize = '24px';
+        title.style.fontSize = '18px';
         button.textContent = 'Ver Mais';
     }
 }
